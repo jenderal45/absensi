@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Absensi Online - Perusahaan</title>
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f1a33;
+      --text:#eaf0ff;
+      --muted:#b9c4e6;
+      --accent:#4f8cff;
+      --accent2:#22c55e;
+      --line:rgba(255,255,255,.08);
+      --shadow: 0 18px 45px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: radial-gradient(1000px 600px at 20% 10%, rgba(79,140,255,.25), transparent 60%),
+                  radial-gradient(900px 600px at 80% 30%, rgba(34,197,94,.18), transparent 60%),
+                  var(--bg);
+      color:var(--text);
+    }
+
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 22px;
+      padding-bottom: 90px;
+    }
+
+    /* HEADER */
+    .topbar{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      justify-content:space-between;
+      padding: 14px 16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width: 0;
+    }
+
+    .logo{
+      width:42px;
+      height:42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(79,140,255,.9), rgba(34,197,94,.85));
+      display:grid;
+      place-items:center;
+      font-weight:700;
+      color:#061021;
+      flex:0 0 auto;
+    }
+
+    .brand-title{
+      display:flex;
+      flex-direction:column;
+      line-height:1.1;
+      min-width:0;
+    }
+    .brand-title strong{
+      font-size: 15px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .brand-title span{
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .right-tools{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex:0 0 auto;
+    }
+
+    .clock{
+      padding: 10px 12px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      font-size: 13px;
+      color: var(--muted);
+      display:flex;
+      gap:10px;
+      align-items:center;
+      white-space: nowrap;
+    }
+
+    .clock b{
+      color: var(--text);
+      font-size: 13px;
+      letter-spacing: .2px;
+    }
+
+    .btn{
+      border:none;
+      cursor:pointer;
+      border-radius: 14px;
+      padding: 10px 14px;
+      font-weight: 700;
+      font-size: 13px;
+      transition: transform .08s ease, opacity .2s ease;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      user-select:none;
+      white-space: nowrap;
+    }
+    .btn:active{ transform: scale(.98); }
+
+    .btn-wa{
+      background: rgba(34,197,94,.15);
+      border: 1px solid rgba(34,197,94,.35);
+      color: #d8ffe8;
+    }
+    .btn-wa:hover{ opacity:.92; }
+
+    /* HERO */
+    .hero{
+      margin-top: 16px;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 16px;
+    }
+
+    .hero-left{
+      padding: 18px;
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-left h1{
+      margin: 0 0 10px;
+      font-size: 22px;
+      letter-spacing: .2px;
+    }
+
+    .hero-left p{
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 12px;
+    }
+    .badge{
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      padding: 9px 12px;
+      border-radius: 999px;
+    }
+
+    .hero-right{
+      padding: 18px;
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      box-shadow: var(--shadow);
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap: 12px;
+    }
+
+    .info{
+      display:grid;
+      gap:10px;
+    }
+    .info-item{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      padding: 12px;
+      border-radius: 16px;
+    }
+    .info-item small{
+      display:block;
+      color: var(--muted);
+      margin-bottom: 4px;
+      font-size: 12px;
+    }
+    .info-item b{
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    /* FORM AREA */
+    .form-card{
+      margin-top: 16px;
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .form-head{
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .form-head .title{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+    .form-head .title strong{
+      font-size: 15px;
+    }
+    .form-head .title span{
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .mini-actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .btn-outline{
+      background: transparent;
+      border: 1px solid rgba(79,140,255,.35);
+      color: #dbe7ff;
+    }
+
+    /* iframe responsive */
+    .iframe-wrap{
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 360px);
+      min-height: 760px;
+      background: rgba(0,0,0,.15);
+    }
+
+    iframe{
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* FOOTER */
+    .footer{
+      margin-top: 14px;
+      text-align:center;
+      color: rgba(255,255,255,.55);
+      font-size: 12px;
+      padding: 12px 8px;
+    }
+
+    /* FLOATING WA */
+    .wa-float{
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 999;
+      width: 58px;
+      height: 58px;
+      border-radius: 999px;
+      background: rgba(34,197,94,.20);
+      border: 1px solid rgba(34,197,94,.45);
+      box-shadow: 0 20px 40px rgba(0,0,0,.35);
+      display:grid;
+      place-items:center;
+      text-decoration:none;
+      transition: transform .1s ease, opacity .2s ease;
+      backdrop-filter: blur(8px);
+    }
+    .wa-float:hover{ opacity:.95; }
+    .wa-float:active{ transform: scale(.98); }
+
+    /* RESPONSIVE (Mobile) */
+    @media (max-width: 900px){
+      .hero{
+        grid-template-columns: 1fr;
+      }
+      .iframe-wrap{
+        height: calc(100vh - 420px);
+        min-height: 720px;
+      }
+    }
+
+    @media (max-width: 520px){
+      .wrap{
+        padding: 14px;
+        padding-bottom: 95px;
+      }
+      .topbar{
+        padding: 12px;
+      }
+      .clock{
+        padding: 9px 10px;
+        font-size: 12px;
+      }
+      .hero-left h1{
+        font-size: 20px;
+      }
+      .iframe-wrap{
+        height: calc(100vh - 420px);
+        min-height: 680px;
+      }
+      .btn{
+        padding: 10px 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo">A</div>
+        <div class="brand-title">
+          <strong>Nama Perusahaan Kamu</strong>
+          <span>Portal Absensi Online</span>
+        </div>
+      </div>
+
+      <div class="right-tools">
+        <div class="clock">
+          <span>🕒</span>
+          <div>
+            <div id="tanggal">-</div>
+            <b id="jam">-</b>
+          </div>
+        </div>
+
+        <!-- tombol WA (desktop) -->
+        <a class="btn btn-wa" id="waBtnTop" href="#" target="_blank" rel="noopener">
+          💬 WA Admin
+        </a>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-left">
+        <h1>Absensi Karyawan (Online)</h1>
+        <p>
+          Silakan isi absensi melalui form di bawah. Pastikan data yang dimasukkan sesuai,
+          karena sistem akan otomatis tercatat di Google Sheets.
+        </p>
+
+        <div class="badges">
+          <div class="badge">✅ Tercatat Otomatis</div>
+          <div class="badge">📌 Aman & Rapi</div>
+          <div class="badge">📱 Mobile Friendly</div>
+          <div class="badge">⚡ Real-time</div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="info">
+          <div class="info-item">
+            <small>Status Sistem</small>
+            <b>Online & Aktif</b>
+          </div>
+          <div class="info-item">
+            <small>Catatan</small>
+            <b>Gunakan nama lengkap</b>
+          </div>
+          <div class="info-item">
+            <small>Bantuan</small>
+            <b>Hubungi Admin via WhatsApp</b>
+          </div>
+        </div>
+
+        <a class="btn btn-outline" href="#form">
+          ⬇️ Isi Absensi Sekarang
+        </a>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="form-card" id="form">
+      <div class="form-head">
+        <div class="title">
+          <strong>Form Absensi</strong>
+          <span>Isi sekali saja, jangan double submit.</span>
+        </div>
+
+        <div class="mini-actions">
+          <a class="btn btn-wa" id="waBtnForm" href="#" target="_blank" rel="noopener">
+            💬 Hubungi Admin
+          </a>
+        </div>
+      </div>
+
+      <div class="iframe-wrap">
+        <iframe
+          src="https://docs.google.com/forms/d/e/1FAIpQLSfIY2uUyJmGYfop8SfE6PBVYpDzOvKRN8Lhs_QnXQ5st6BjNg/viewform?embedded=true"
+          loading="lazy"
+          title="Absensi Online"
+        >
+          Memuat…
+        </iframe>
+      </div>
+    </div>
+
+    <div class="footer">
+      © 2026 • Portal Absensi Online • Dibuat untuk kebutuhan internal perusahaan
+    </div>
+
+  </div>
+
+  <!-- Floating WhatsApp -->
+  <a class="wa-float" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="WhatsApp Admin">
+    <!-- icon sederhana -->
+    <span style="font-size:24px;">🟢</span>
+  </a>
+
+  <script>
+    // ==========================
+    // 1) JAM REALTIME
+    // ==========================
+    function pad(n){ return n < 10 ? "0" + n : n; }
+
+    function updateClock(){
+      const now = new Date();
+
+      // Format tanggal Indonesia
+      const hari = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+      const bulan = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
+
+      const h = hari[now.getDay()];
+      const tgl = now.getDate();
+      const bln = bulan[now.getMonth()];
+      const thn = now.getFullYear();
+
+      const jam = pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds());
+
+      document.getElementById("tanggal").textContent = `${h}, ${tgl} ${bln} ${thn}`;
+      document.getElementById("jam").textContent = jam;
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // ==========================
+    // 2) KONFIG WA ADMIN
+    // ==========================
+    // GANTI NOMOR WA DI SINI (format internasional tanpa +)
+    // Contoh Indonesia: 6281234567890
+    const WA_ADMIN = "6281234567890";
+
+    const pesan = encodeURIComponent(
+      "Halo Admin, saya ingin bertanya terkait Absensi Online."
+    );
+
+    const waLink = `https://wa.me/${WA_ADMIN}?text=${pesan}`;
+
+    document.getElementById("waBtnTop").href = waLink;
+    document.getElementById("waBtnForm").href = waLink;
+    document.getElementById("waFloat").href = waLink;
+  </script>
+</body>
+</html>
