@@ -13,6 +13,7 @@
       --muted:#b9c4e6;
       --accent:#4f8cff;
       --accent2:#22c55e;
+      --danger:#ef4444;
       --line:rgba(255,255,255,.08);
       --shadow: 0 18px 45px rgba(0,0,0,.35);
       --radius: 18px;
@@ -31,11 +32,11 @@
     .wrap{
       max-width: 1100px;
       margin: 0 auto;
-      padding: 22px;
+      padding: 18px;
       padding-bottom: 90px;
     }
 
-    /* HEADER */
+    /* TOPBAR */
     .topbar{
       display:flex;
       gap:14px;
@@ -56,16 +57,14 @@
       min-width: 0;
     }
 
-    .logo{
-      width:42px;
-      height:42px;
+    .logo-img{
+      width: 44px;
+      height: 44px;
       border-radius: 14px;
-      background: linear-gradient(135deg, rgba(79,140,255,.9), rgba(34,197,94,.85));
-      display:grid;
-      place-items:center;
-      font-weight:700;
-      color:#061021;
-      flex:0 0 auto;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      flex: 0 0 auto;
     }
 
     .brand-title{
@@ -139,6 +138,19 @@
     }
     .btn-wa:hover{ opacity:.92; }
 
+    .btn-primary{
+      background: rgba(79,140,255,.20);
+      border: 1px solid rgba(79,140,255,.35);
+      color: #dbe7ff;
+    }
+    .btn-primary:hover{ opacity:.92; }
+
+    .btn-danger{
+      background: rgba(239,68,68,.15);
+      border: 1px solid rgba(239,68,68,.35);
+      color: #ffd9d9;
+    }
+
     /* HERO */
     .hero{
       margin-top: 16px;
@@ -147,7 +159,7 @@
       gap: 16px;
     }
 
-    .hero-left{
+    .card{
       padding: 18px;
       border-radius: var(--radius);
       border:1px solid var(--line);
@@ -183,18 +195,6 @@
       border-radius: 999px;
     }
 
-    .hero-right{
-      padding: 18px;
-      border-radius: var(--radius);
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      box-shadow: var(--shadow);
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      gap: 12px;
-    }
-
     .info{
       display:grid;
       gap:10px;
@@ -216,7 +216,7 @@
       color: var(--text);
     }
 
-    /* FORM AREA */
+    /* FORM */
     .form-card{
       margin-top: 16px;
       border-radius: var(--radius);
@@ -253,19 +253,14 @@
       display:flex;
       gap:10px;
       align-items:center;
-    }
-
-    .btn-outline{
-      background: transparent;
-      border: 1px solid rgba(79,140,255,.35);
-      color: #dbe7ff;
+      flex-wrap: wrap;
     }
 
     /* iframe responsive */
     .iframe-wrap{
       position: relative;
       width: 100%;
-      height: calc(100vh - 360px);
+      height: calc(100vh - 380px);
       min-height: 760px;
       background: rgba(0,0,0,.15);
     }
@@ -306,159 +301,297 @@
     .wa-float:hover{ opacity:.95; }
     .wa-float:active{ transform: scale(.98); }
 
-    /* RESPONSIVE (Mobile) */
+    /* MODAL LOGIN */
+    .modal{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      z-index: 9999;
+      backdrop-filter: blur(8px);
+    }
+
+    .modal-box{
+      width: 100%;
+      max-width: 420px;
+      border-radius: 22px;
+      border:1px solid var(--line);
+      background: rgba(15,26,51,.85);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .modal-box h2{
+      margin: 0 0 6px;
+      font-size: 18px;
+    }
+    .modal-box p{
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      margin-top: 10px;
+    }
+
+    input{
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      outline:none;
+      font-size: 14px;
+    }
+
+    .error{
+      display:none;
+      margin-top: 10px;
+      font-size: 13px;
+      color: #ffd0d0;
+      border: 1px solid rgba(239,68,68,.35);
+      background: rgba(239,68,68,.12);
+      padding: 10px 12px;
+      border-radius: 14px;
+    }
+
+    /* SUCCESS SCREEN */
+    .success{
+      display:none;
+      margin-top: 16px;
+    }
+
+    .success h2{
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+    .success p{
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    /* Hide main content before login */
+    .locked{
+      display:none;
+    }
+
+    /* RESPONSIVE */
     @media (max-width: 900px){
-      .hero{
-        grid-template-columns: 1fr;
-      }
+      .hero{ grid-template-columns: 1fr; }
       .iframe-wrap{
-        height: calc(100vh - 420px);
+        height: calc(100vh - 430px);
         min-height: 720px;
       }
     }
 
     @media (max-width: 520px){
-      .wrap{
-        padding: 14px;
-        padding-bottom: 95px;
-      }
-      .topbar{
-        padding: 12px;
-      }
-      .clock{
-        padding: 9px 10px;
-        font-size: 12px;
-      }
-      .hero-left h1{
-        font-size: 20px;
-      }
+      .wrap{ padding: 14px; padding-bottom: 95px; }
+      .topbar{ padding: 12px; }
+      .clock{ padding: 9px 10px; font-size: 12px; }
+      .hero-left h1{ font-size: 20px; }
       .iframe-wrap{
-        height: calc(100vh - 420px);
+        height: calc(100vh - 430px);
         min-height: 680px;
       }
-      .btn{
-        padding: 10px 12px;
-      }
+      .btn{ padding: 10px 12px; }
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
 
-    <!-- TOPBAR -->
-    <div class="topbar">
-      <div class="brand">
-        <div class="logo">A</div>
-        <div class="brand-title">
-          <strong>PT Astria Sukses Internasional (Divisi Exmind Digital)</strong>
-          <span>Portal Absensi Online</span>
-        </div>
+  <!-- MODAL LOGIN -->
+  <div class="modal" id="loginModal">
+    <div class="modal-box">
+      <h2>🔐 Login Absensi</h2>
+      <p>
+        Masukkan PIN untuk mengakses form absensi.
+        Jika lupa PIN, silakan hubungi Admin.
+      </p>
+
+      <div class="field">
+        <input id="pinInput" type="password" placeholder="Masukkan PIN..." inputmode="numeric" />
       </div>
 
-      <div class="right-tools">
-        <div class="clock">
-          <span>🕒</span>
-          <div>
-            <div id="tanggal">-</div>
-            <b id="jam">-</b>
-          </div>
-        </div>
+      <div class="mini-actions" style="margin-top:14px;">
+        <button class="btn btn-primary" id="btnLogin">Masuk</button>
+        <a class="btn btn-wa" id="waBtnLogin" href="#" target="_blank" rel="noopener">💬 WA Admin</a>
+      </div>
 
-        <!-- tombol WA (desktop) -->
-        <a class="btn btn-wa" id="waBtnTop" href="#" target="_blank" rel="noopener">
-          💬 WA Admin
-        </a>
+      <div class="error" id="pinError">
+        ❌ PIN salah. Silakan coba lagi.
       </div>
     </div>
+  </div>
 
-    <!-- HERO -->
-    <div class="hero">
-      <div class="hero-left">
-        <h1>Absensi Karyawan (Online)</h1>
-        <p>
-          Silakan isi absensi melalui form di bawah. Pastikan data yang dimasukkan sesuai,
-          karena sistem akan otomatis tercatat di Google Sheets.
-        </p>
+  <!-- MAIN CONTENT (locked until login) -->
+  <div class="locked" id="mainContent">
+    <div class="wrap">
 
-        <div class="badges">
-          <div class="badge">✅ Tercatat Otomatis</div>
-          <div class="badge">📌 Aman & Rapi</div>
-          <div class="badge">📱 Mobile Friendly</div>
-          <div class="badge">⚡ Real-time</div>
-        </div>
-      </div>
+      <!-- TOPBAR -->
+      <div class="topbar">
+        <div class="brand">
+          <!-- GANTI LOGO DI SINI -->
+          <img class="logo-img" src="logo.png" alt="Logo Perusahaan" />
 
-      <div class="hero-right">
-        <div class="info">
-          <div class="info-item">
-            <small>Status Sistem</small>
-            <b>Online & Aktif</b>
-          </div>
-          <div class="info-item">
-            <small>Catatan</small>
-            <b>Gunakan nama lengkap</b>
-          </div>
-          <div class="info-item">
-            <small>Bantuan</small>
-            <b>Hubungi Admin via WhatsApp</b>
+          <div class="brand-title">
+            <strong>Nama Perusahaan Kamu</strong>
+            <span>Portal Absensi Online</span>
           </div>
         </div>
 
-        <a class="btn btn-outline" href="#form">
-          ⬇️ Isi Absensi Sekarang
-        </a>
-      </div>
-    </div>
+        <div class="right-tools">
+          <div class="clock">
+            <span>🕒</span>
+            <div>
+              <div id="tanggal">-</div>
+              <b id="jam">-</b>
+            </div>
+          </div>
 
-    <!-- FORM -->
-    <div class="form-card" id="form">
-      <div class="form-head">
-        <div class="title">
-          <strong>Form Absensi</strong>
-          <span>Isi sekali saja, jangan double submit.</span>
-        </div>
-
-        <div class="mini-actions">
-          <a class="btn btn-wa" id="waBtnForm" href="#" target="_blank" rel="noopener">
-            💬 Hubungi Admin
+          <a class="btn btn-wa" id="waBtnTop" href="#" target="_blank" rel="noopener">
+            💬 WA Admin
           </a>
         </div>
       </div>
 
-      <div class="iframe-wrap">
-        <iframe
-          src="https://docs.google.com/forms/d/e/1FAIpQLSfIY2uUyJmGYfop8SfE6PBVYpDzOvKRN8Lhs_QnXQ5st6BjNg/viewform?embedded=true"
-          loading="lazy"
-          title="Absensi Online"
-        >
-          Memuat…
-        </iframe>
+      <!-- HERO -->
+      <div class="hero">
+        <div class="card hero-left">
+          <h1>Absensi Karyawan (Online)</h1>
+          <p>
+            Silakan isi absensi melalui form di bawah. Pastikan data yang dimasukkan sesuai,
+            karena sistem akan otomatis tercatat di Google Sheets.
+          </p>
+
+          <div class="badges">
+            <div class="badge">✅ Tercatat Otomatis</div>
+            <div class="badge">📌 Aman & Rapi</div>
+            <div class="badge">📱 Mobile Friendly</div>
+            <div class="badge">⚡ Real-time</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="info">
+            <div class="info-item">
+              <small>Status Sistem</small>
+              <b>Online & Aktif</b>
+            </div>
+            <div class="info-item">
+              <small>Catatan</small>
+              <b>Gunakan nama lengkap</b>
+            </div>
+            <div class="info-item">
+              <small>Bantuan</small>
+              <b>Hubungi Admin via WhatsApp</b>
+            </div>
+          </div>
+
+          <div class="mini-actions" style="margin-top:14px;">
+            <a class="btn btn-primary" href="#form">⬇️ Isi Absensi</a>
+            <button class="btn btn-danger" id="btnLogout">Keluar</button>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="footer">
-      Powered By Exmind Digital© 2026 • Portal Absensi Online • Dibuat untuk kebutuhan internal perusahaan
-    </div>
+      <!-- FORM -->
+      <div class="form-card" id="form">
+        <div class="form-head">
+          <div class="title">
+            <strong>Form Absensi</strong>
+            <span>Isi sekali saja, jangan double submit.</span>
+          </div>
 
+          <div class="mini-actions">
+            <a class="btn btn-wa" id="waBtnForm" href="#" target="_blank" rel="noopener">
+              💬 Hubungi Admin
+            </a>
+
+            <!-- Tombol sukses (manual) -->
+            <button class="btn btn-primary" id="btnDone">
+              ✅ Saya sudah submit
+            </button>
+          </div>
+        </div>
+
+        <div class="iframe-wrap">
+          <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLSfIY2uUyJmGYfop8SfE6PBVYpDzOvKRN8Lhs_QnXQ5st6BjNg/viewform?embedded=true"
+            loading="lazy"
+            title="Absensi Online"
+          >
+            Memuat…
+          </iframe>
+        </div>
+      </div>
+
+      <!-- SUCCESS PAGE (internal) -->
+      <div class="card success" id="successPage">
+        <h2>✅ Absensi Terkirim</h2>
+        <p>
+          Terima kasih. Jika data sudah terkirim, kamu bisa menutup halaman ini.
+          Jika ada kendala, silakan hubungi Admin.
+        </p>
+
+        <div class="mini-actions">
+          <a class="btn btn-primary" href="#form">⬅️ Kembali ke Form</a>
+          <a class="btn btn-wa" id="waBtnSuccess" href="#" target="_blank" rel="noopener">💬 WA Admin</a>
+        </div>
+      </div>
+
+      <div class="footer">
+        © 2026 • Portal Absensi Online • Internal Perusahaan
+      </div>
+
+    </div>
   </div>
 
   <!-- Floating WhatsApp -->
   <a class="wa-float" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="WhatsApp Admin">
-    <!-- icon sederhana -->
     <span style="font-size:24px;">🟢</span>
   </a>
 
   <script>
     // ==========================
-    // 1) JAM REALTIME
+    // 1) KONFIGURASI WA
+    // ==========================
+    // GANTI NOMOR WA ADMIN DI SINI (format internasional tanpa +)
+    // Contoh Indonesia: 6281234567890
+    const WA_ADMIN = "6281234567890";
+
+    const pesan = encodeURIComponent(
+      "Halo Admin, saya ingin bertanya terkait Absensi Online."
+    );
+
+    const waLink = `https://wa.me/${WA_ADMIN}?text=${pesan}`;
+
+    // set ke semua tombol WA
+    document.getElementById("waBtnTop").href = waLink;
+    document.getElementById("waBtnForm").href = waLink;
+    document.getElementById("waFloat").href = waLink;
+    document.getElementById("waBtnLogin").href = waLink;
+    document.getElementById("waBtnSuccess").href = waLink;
+
+    // ==========================
+    // 2) JAM REALTIME
     // ==========================
     function pad(n){ return n < 10 ? "0" + n : n; }
 
     function updateClock(){
       const now = new Date();
 
-      // Format tanggal Indonesia
       const hari = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
       const bulan = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
 
@@ -477,21 +610,63 @@
     setInterval(updateClock, 1000);
 
     // ==========================
-    // 2) KONFIG WA ADMIN
+    // 3) LOGIN PIN SEDERHANA
     // ==========================
-    // GANTI NOMOR WA DI SINI (format internasional tanpa +)
-    // Contoh Indonesia: 6281388345344
-    const WA_ADMIN = "6281388345344";
+    // GANTI PIN DI SINI
+    const PIN_BENAR = "1234";
 
-    const pesan = encodeURIComponent(
-      "Halo Admin, saya ingin bertanya terkait Absensi Online."
-    );
+    const loginModal = document.getElementById("loginModal");
+    const mainContent = document.getElementById("mainContent");
+    const pinInput = document.getElementById("pinInput");
+    const pinError = document.getElementById("pinError");
 
-    const waLink = `https://wa.me/${WA_ADMIN}?text=${pesan}`;
+    function bukaAkses(){
+      loginModal.style.display = "none";
+      mainContent.style.display = "block";
+      pinError.style.display = "none";
+      pinInput.value = "";
 
-    document.getElementById("waBtnTop").href = waLink;
-    document.getElementById("waBtnForm").href = waLink;
-    document.getElementById("waFloat").href = waLink;
+      // simpan login di browser (biar gak input ulang)
+      localStorage.setItem("absensi_login", "true");
+    }
+
+    function logout(){
+      localStorage.removeItem("absensi_login");
+      location.reload();
+    }
+
+    function cekPin(){
+      const val = (pinInput.value || "").trim();
+      if(val === PIN_BENAR){
+        bukaAkses();
+      }else{
+        pinError.style.display = "block";
+      }
+    }
+
+    document.getElementById("btnLogin").addEventListener("click", cekPin);
+
+    pinInput.addEventListener("keydown", function(e){
+      if(e.key === "Enter") cekPin();
+    });
+
+    document.getElementById("btnLogout").addEventListener("click", logout);
+
+    // auto login jika sebelumnya sudah login
+    if(localStorage.getItem("absensi_login") === "true"){
+      bukaAkses();
+    }
+
+    // ==========================
+    // 4) HALAMAN SUKSES (manual)
+    // ==========================
+    const successPage = document.getElementById("successPage");
+    const btnDone = document.getElementById("btnDone");
+
+    btnDone.addEventListener("click", function(){
+      successPage.style.display = "block";
+      successPage.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   </script>
 </body>
 </html>
